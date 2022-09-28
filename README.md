@@ -18,4 +18,46 @@ a-garcm0b@library-elk:~/Work$
 
 ## Cleaning Input File
 
+Extracting the URL from the file. From 
 
+```
+(...)
+"PDF_URL": "https://repository.kaust.edu.sa/bitstream/10754/133211/1/FarhanAbdulGhaffarThesis.pdf"
+"PDF_URL": "https://repository.kaust.edu.sa/bitstream/10754/133969/1/Gamal%20Amin%20Thesis-final2.pdf"
+(...)
+```
+
+To just the URL
+
+```
+a-garcm0b@library-elk:~/Work$ grep 'PDF_URL' listOfETDs.json | head | cut -d ':' -f 2-
+"https://repository.kaust.edu.sa/bitstream/10754/133211/1/FarhanAbdulGhaffarThesis.pdf"
+"https://repository.kaust.edu.sa/bitstream/10754/133969/1/Gamal%20Amin%20Thesis-final2.pdf"
+(...)
+```
+
+Next we remove the double quotes from the URL
+
+```
+a-garcm0b@library-elk:~/Work$ sed -i 's/"//g' listOfArticles.txt
+a-garcm0b@library-elk:~/Work$ head listOfArticles.txt
+https://repository.kaust.edu.sa/bitstream/10754/205812/1/Abdulaziz%20Barastheses.pdf
+(...)
+```
+
+Finally we download the articles (no thesis or dissertations)
+
+```
+a-garcm0b@library-elk:~/Work$ FILES=`cat listOfArticles.txt `
+
+```
+a-garcm0b@library-elk:~/repo2text/in$ for ff in $FILES
+> do
+> wget --quiet $ff
+> done
+a-garcm0b@library-elk:~/repo2text/in$ ll
+total 412M
+-rw-r--r-- 1 a-garcm0b g-a-garcm0b 5.8M Sep 14  2021 '2015_12_14_Garret McKerricher_Final.pdf'
+-rw-r--r-- 1 a-garcm0b g-a-garcm0b 1.5M Sep 14  2021 'A Regularized Stationary Mean-Field Game.pdf'
+(...)
+```
