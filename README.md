@@ -49,8 +49,6 @@ Finally we download the articles (no thesis or dissertations)
 
 ```
 a-garcm0b@library-elk:~/Work$ FILES=`cat listOfArticles.txt `
-
-```
 a-garcm0b@library-elk:~/repo2text/in$ for ff in $FILES
 > do
 > wget --quiet $ff
