@@ -49,13 +49,16 @@ Finally we download the articles (no thesis or dissertations)
 
 ```
 a-garcm0b@library-elk:~/Work$ FILES=`cat listOfArticles.txt `
-a-garcm0b@library-elk:~/repo2text/in$ for ff in $FILES
+a-garcm0b@library-elk:~/Work$ cd ~/repo2text/in/
+a-garcm0b@library-elk:~/repo2text/in$
+a-garcm0b@library-elk:~/repo2text/in$
+a-garcm0b@library-elk:~/repo2text/in$ for file in $FILES
 > do
-> wget --quiet $ff
+> curl -L -s -O $file
 > done
-a-garcm0b@library-elk:~/repo2text/in$ ll
-total 412M
--rw-r--r-- 1 a-garcm0b g-a-garcm0b 5.8M Sep 14  2021 '2015_12_14_Garret McKerricher_Final.pdf'
--rw-r--r-- 1 a-garcm0b g-a-garcm0b 1.5M Sep 14  2021 'A Regularized Stationary Mean-Field Game.pdf'
+a-garcm0b@library-elk:~/repo2text/in$ ls
+2015_12_14_Garret%20McKerricher_Final.pdf
+A%20Regularized%20Stationary%20Mean-Field%20Game.pdf
+Abdulaziz%20Barastheses.pdf
 (...)
 ```
