@@ -19,7 +19,7 @@ The pseudo code for script is
 ```
 ROOT_DIR: root directory to data, like `/repo`
 DIR_IN: directory where repository will dump the file, like `/repo/in`
-CSV_FILE: file with the CSV for the items from the repository: /repo/metadata.csv
+CSV_FILE: file with the CSV for the items from the repository: `${ROOT_DIR}/metadata.csv`
 
 for each dir in $DIR_IN:
     read file JSON named ${DIR_IN}/${dir_name}/${dir_name}.json
