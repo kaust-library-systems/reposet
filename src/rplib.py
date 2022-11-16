@@ -12,7 +12,7 @@ def read_config(config_file: str) -> str:
         config.read(config_file)
         files_dir = config['REPO']['IN_DIR']
     except CP.Error as ee:
-        LOG.error(f"Error reading config file '{config_file}'")
+        LOG.critical(f"Error reading config file '{config_file}'")
         files_dir = ""
     
     return files_dir

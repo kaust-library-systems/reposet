@@ -12,6 +12,7 @@ def main(input):
     LOG.basicConfig(encoding='utf-8', level=LOG.INFO)
 
     files_dir = RP.read_config(input.name)
+    files_dir = ""
     if not files_dir:
         LOG.critical(f"The path of input files is empty")
         raise Exception("Error getting the directory to read input files")
