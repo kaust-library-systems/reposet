@@ -14,6 +14,26 @@ Creating dataset from the files in the repository in similar way to [cord19 proj
 * department
 * grantor
 
+
+Directory structure of files downloaded from the repository
+
+```
+(venv) mgarcia@mordor:~/Work/reposet/data/in$ tree 10754_209405/
+10754_209405/
+├── 10754_209405.json
+├── 10754_209405.xml
+├── 218531-377184.json
+├── 218531-377185.json
+├── 218531-377185.pdf
+├── 218531-377186.json
+├── 218531-377186.pdf
+├── data
+│   ├── 218531-377184.metadata
+│   └── 218531-377184.pdf
+├── manifest-sha256.txt
+└── tagmanifest-sha256.txt
+```
+
 The pseudo code for script is
 
 ```
