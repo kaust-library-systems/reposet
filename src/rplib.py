@@ -47,7 +47,10 @@ def get_metadata(json_file: str) -> dict:
     if not data:
         return {}
     else:
-        
+        entity_metadata = data['metadata']
+        row_csv = dict((ee['key'].split('.')[-1],ee['value']) for ee in entity_metadata)
+        return row_csv
+
 def get_json(root_dir: str) -> list:
     '''Return  a list with the path to the JSON files'''
 
