@@ -4,7 +4,7 @@
 import click as CL
 import rplib as RP
 import logging as LOG
-
+import csv
 @CL.command()
 @CL.argument('input', type=CL.File('r'))
 def main(input):
@@ -20,8 +20,17 @@ def main(input):
 
     json_file_list = RP.get_json(root_dir)
 
+    # For each JSON file, return a row (dictionary) with all the metadata of
+    # the repository entity, like thesis, dissertations, etc.
+    rows_csv = []
     for jj in json_file_list:
-        RP.get_metadata(jj)
+        rows_csv.append(RP.get_metadata(jj))
+
+    with open('metadata.csv', 'w', newline='') as csvfile:
+        field_names = rows_csv[0].keys()
+        writer = csv.DictWriter(csvfile, fieldnames=field_names)
+        writer.writeheader()
+        writer.writerows(rows_csv)
 
 if __name__ == "__main__":
     main()
