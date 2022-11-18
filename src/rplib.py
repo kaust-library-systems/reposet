@@ -2,6 +2,71 @@
 
 import configparser as CP
 import logging as LOG
+import pathlib as PL
+import json as JSON
+
+def clean_json(json_file: str) -> any:
+    '''Clean the JSON file by removing the external quotes.
+    Returns json data or an empty string. '''
+
+    LOG.info(f"Trying to clean JSON file '{json_file}'")
+    try:
+        with open(json_file) as fin:
+            text = fin.readlines()
+        #
+        text = str(text[0])
+        len_text = len(text)
+        data = JSON.loads(text[1:len_text-1])
+    except ValueError as ee:
+        LOG.warning(f"Unable to clean JSON file '{json_file}'")
+        data = ""
+    finally:
+        return data
+
+def read_json_file(json_file: str) -> any:
+    '''Read the JSON file.
+    Returns the JSON data or an empty string in case of error.'''
+
+    # Try to read the json
+    LOG.info(f"Reading JSON file '{json_file}'")
+    try:
+        with open(json_file, 'r') as fin:
+            data = JSON.load(fin)
+    except ValueError as ee:
+        LOG.error(f"Error {ee} while reading JSON file '{json_file}'.")
+        data = clean_json(json_file)
+    finally:
+        return data
+
+
+def get_metadata(json_file: str) -> dict:
+    '''Return a dictionary with article metadata from the json file'''
+
+    data = read_json_file(json_file)
+
+    if not data:
+        return {}
+    else:
+        
+def get_json(root_dir: str) -> list:
+    '''Return  a list with the path to the JSON files'''
+
+    files_path = PL.Path(root_dir)
+    json_list = []
+
+    for ff in files_path.iterdir():
+        json_file = f"{ff.stem}.json"
+        json_path = ff.joinpath(json_file)
+        if json_path.exists:
+            json_list.append(json_path)
+        else:
+            LOG.warn(f"JSON file '{json_path}' not found.")
+            # Adding a 'next' in case we add more statements below, and
+            # forget that we should go to the next directory in the list.
+            next
+
+    return json_list
+
 
 def read_config(config_file: str) -> str:
     ''' Read config file, and return diretory to read. '''
