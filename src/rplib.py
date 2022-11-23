@@ -7,7 +7,7 @@ import json as JSON
 
 def clean_json(json_file: str) -> dict:
     '''Clean the JSON file by removing the external quotes.
-    Returns json data or an empty string. '''
+    Returns json data or an empty dict in case unable to clean. '''
 
     LOG.info(f"Trying to clean JSON file '{json_file}'")
     try:
@@ -25,7 +25,7 @@ def clean_json(json_file: str) -> dict:
 
 def read_json_file(json_file: str) -> dict:
     '''Read the JSON file.
-    Returns the JSON data or an empty string in case of error.'''
+    Returns the JSON data or an empty dict in case of error.'''
 
     # Try to read the json
     LOG.info(f"Reading JSON file '{json_file}'")
