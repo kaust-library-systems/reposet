@@ -5,25 +5,25 @@ import logging as LOG
 import pathlib as PL
 import json as JSON
 
-def clean_json(json_file: str) -> any:
+def clean_json(json_file: str) -> dict:
     '''Clean the JSON file by removing the external quotes.
     Returns json data or an empty string. '''
 
     LOG.info(f"Trying to clean JSON file '{json_file}'")
     try:
         with open(json_file) as fin:
-            text = fin.readlines()
+            in_text = fin.readlines()
         #
-        text = str(text[0])
+        text = str(in_text[0])
         len_text = len(text)
         data = JSON.loads(text[1:len_text-1])
     except ValueError as ee:
         LOG.warning(f"Unable to clean JSON file '{json_file}'")
-        data = ""
+        data = {}
     finally:
         return data
 
-def read_json_file(json_file: str) -> any:
+def read_json_file(json_file: str) -> dict:
     '''Read the JSON file.
     Returns the JSON data or an empty string in case of error.'''
 
@@ -60,7 +60,7 @@ def get_json(root_dir: str) -> list:
     for ff in files_path.iterdir():
         json_file = f"{ff.stem}.json"
         json_path = ff.joinpath(json_file)
-        if json_path.exists:
+        if json_path.exists():
             json_list.append(json_path)
         else:
             LOG.warn(f"JSON file '{json_path}' not found.")
@@ -75,8 +75,8 @@ def read_config(config_file: str) -> str:
     ''' Read config file, and return diretory to read. '''
 
     try:
-        config = CP.ConfigParser()
-        config._interpolation = CP.ExtendedInterpolation()
+        config = CP.ConfigParser(interpolation=CP.ExtendedInterpolation())
+        #config._interpolation = CP.ExtendedInterpolation()
         config.read(config_file)
         files_dir = config['REPO']['IN_DIR']
     except CP.Error as ee:
