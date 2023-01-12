@@ -17,7 +17,7 @@ def clean_json(json_file: str) -> dict:
         #
         text = str(in_text[0])
         len_text = len(text)
-        data = JSON.loads(text[1  :  len_text  -  1])
+        data = JSON.loads(text[1 : len_text - 1])
     except ValueError as ee:
         LOG.warning(f"Unable to clean JSON file '{json_file}'")
         data = {}
@@ -32,7 +32,6 @@ def read_json_file(json_file: str) -> dict:
     # Try to read the json
     LOG.info(f"Reading JSON file '{json_file}'")
     try:
-        with open(json_file, "r") as fin:
         with open(json_file, "r") as fin:
             data = JSON.load(fin)
     except ValueError as ee:
@@ -97,6 +96,4 @@ def read_config(config_file: str) -> str:
         LOG.critical(f"Error reading config file '{config_file}'")
         files_dir = ""
 
-
     return files_dir
-
