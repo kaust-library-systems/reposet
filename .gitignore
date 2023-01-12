@@ -1,6 +1,7 @@
 # Test files to ingest into Preservica
 data/
 *csv
+config/reposet.cfg
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
