@@ -32,7 +32,7 @@ def read_json_file(json_file: str) -> dict:
     # Try to read the json
     LOG.info(f"Reading JSON file '{json_file}'")
     try:
-        with open(json_file, "r") as fin:
+        with open(json_file, "r", encoding="utf-8") as fin:
             data = JSON.load(fin)
     except ValueError as ee:
         LOG.error(f"Error {ee} while reading JSON file '{json_file}'.")
