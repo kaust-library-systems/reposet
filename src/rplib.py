@@ -43,7 +43,6 @@ def read_json_file(json_file: str) -> dict:
 
 def get_metadata(json_file: str) -> dict:
     """Return a dictionary with article metadata from the json file"""
-    """Return a dictionary with article metadata from the json file"""
 
     data = read_json_file(json_file)
 
@@ -54,15 +53,14 @@ def get_metadata(json_file: str) -> dict:
         row_csv = dict(
             (ee["key"].split(".")[-1], ee["value"]) for ee in entity_metadata
         )
-        entity_metadata = data["metadata"]
-        row_csv = dict(
-            (ee["key"].split(".")[-1], ee["value"]) for ee in entity_metadata
-        )
+        # entity_metadata = data["metadata"]
+        # row_csv = dict(
+        #     (ee["key"].split(".")[-1], ee["value"]) for ee in entity_metadata
+        # )
         return row_csv
 
 
 def get_json(root_dir: str) -> list:
-    """Return  a list with the path to the JSON files"""
     """Return  a list with the path to the JSON files"""
 
     files_path = PL.Path(root_dir)
@@ -83,7 +81,6 @@ def get_json(root_dir: str) -> list:
 
 
 def read_config(config_file: str) -> str:
-    """Read config file, and return diretory to read."""
     """Read config file, and return diretory to read."""
 
     try:
