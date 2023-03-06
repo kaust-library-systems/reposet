@@ -2,6 +2,7 @@
 data/
 *csv
 etc/reposet.cfg
+.vscode
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
