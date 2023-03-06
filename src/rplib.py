@@ -53,10 +53,16 @@ def get_metadata(json_file: str) -> dict:
         row_csv = dict(
             (ee["key"].split(".")[-1], ee["value"]) for ee in entity_metadata
         )
-        # entity_metadata = data["metadata"]
-        # row_csv = dict(
-        #     (ee["key"].split(".")[-1], ee["value"]) for ee in entity_metadata
-        # )
+        # We need to clean the fields "advisor", "author", "committeemember"
+        # These fields have a kind of hash after the name, like
+        # 'Doe, John.::223b106253001300df2de18dccb8fe6c',
+        # so we remove everything after the ':'.
+        # Note the walrus operator ':='
+        fields_hash = ["advisor", "author", "committeemember"] 
+        for ff in fields_hash:
+            # (pos := name.find(":")) > 0 and name[:pos] or name
+            row_csv[ff] = (pos := row_csv[ff].find(":")) > 0 and \
+                row_csv[ff][:pos] or row_csv[ff]
         return row_csv
 
 
