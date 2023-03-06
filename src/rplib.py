@@ -56,7 +56,8 @@ def get_metadata(json_file: str) -> dict:
         # We need to clean the fields "advisor", "author", "committeemember"
         # These fields have a kind of hash after the name, like
         # 'Doe, John.::223b106253001300df2de18dccb8fe6c',
-        # so we remove everything after the ':'.
+        # so we remove everything after the ':'. If the name, doesn't have a
+        # hash we simply ignore it.
         # Note the walrus operator ':='
         fields_hash = ["advisor", "author", "committeemember"] 
         for ff in fields_hash:
