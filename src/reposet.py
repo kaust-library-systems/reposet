@@ -8,12 +8,12 @@ import csv
 
 
 @CL.command()
-@CL.argument("input", type=CL.File("r"))
+@CL.argument("input", type=CL.Path(exists=True))
 def main(input):
 
     LOG.basicConfig(encoding="utf-8", level=LOG.INFO)
 
-    root_dir = RP.read_config(input.name)
+    root_dir = RP.read_config(input)
     if not root_dir:
         LOG.critical(f"The path for input files is empty")
         raise Exception("Error getting the directory to read input files from")
